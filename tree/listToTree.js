@@ -4391,23 +4391,14 @@ const list = [
 ];
 
 const listObj = {};
-const result = [];
 
-for (let index = 0; index < list.length; index++) {
-  const element = list[index];
-  if (!listObj[element.poid]) {
-    listObj[element.poid] = [];
+for (let i = 0; i < list.length; i++) {
+  const item = list[i];
+  if (listObj[item.poid] === undefined) {
+    listObj[item.poid] = [];
   }
-  listObj[element.poid].push(element);
+  listObj[item.poid].push(item);
+  item.children = listObj[item.oid] || [];
 }
 
-for (let index = 0; index < list.length; index++) {
-  const element = list[index];
-  element.children = listObj[element.oid];
-
-  if (element.poid === 0) {
-    result.push(element);
-  }
-}
-
-console.log(result);
+console.log(listObj[0]);
